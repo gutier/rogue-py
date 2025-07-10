@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import copy
-from typing import Tuple
 from typing import Optional, Tuple, Type, TypeVar, TYPE_CHECKING
+
+from render_order import RenderOrder
 
 if TYPE_CHECKING:
     from components.ai import BaseAI
@@ -29,6 +30,7 @@ class Entity:
         color: Tuple[int, int, int] = (255, 255, 255),
         name: str = "<Unnamed>",
         blocks_movement: bool = False,
+        render_order: RenderOrder = RenderOrder.CORPSE,
     ):
         self.x = x
         self.y = y
@@ -36,6 +38,7 @@ class Entity:
         self.color = color
         self.name = name
         self.blocks_movement = blocks_movement
+        self.render_order = render_order
         if gamemap:
             # If gamemap isn't provided now then it will be set later.
             self.gamemap = gamemap
@@ -85,6 +88,7 @@ class Actor(Entity):
             color=color,
             name=name,
             blocks_movement=True,
+            render_order=RenderOrder.ACTOR,
         )
 
         self.ai: Optional[BaseAI] = ai_cls(self)
