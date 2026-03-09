@@ -76,6 +76,11 @@ class ItemAction(Action):
             self.item.consumable.activate(self)
 
 
+class DropItem(ItemAction):
+    def perform(self) -> None:
+        self.entity.inventory.drop(self.item)
+
+
 class EscapeAction(Action):
     def perform(self) -> None:
         raise SystemExit()
