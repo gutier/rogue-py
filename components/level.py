@@ -72,3 +72,5 @@ class Level(BaseComponent):
         self.parent.fighter.defense += amount
 
         self.engine.message_log.add_message("Your movements are getting swifter!")
+
+        self.increase_level()
